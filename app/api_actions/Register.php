@@ -5,13 +5,13 @@ use app\TokenManagement;
 use stdClass;
 use app\DatabaseConnection;
 
-class Login extends Action {
+class Register extends Action {
 
-    public static function doAction($params, $userID = null): object {
+    static function doAction($params, $userID = null): object {
         $response = new stdClass();
         $db = new DatabaseConnection();
 
-        switch ($db->checkCredentials($params->username, $params->password)) {
+        switch ($db->createUser($params->username, $params->password)) {
             case "success":
                 $response->userID = $db->getIDbyUsername($params->username);
                 $response->username = $params->username;
@@ -20,19 +20,16 @@ class Login extends Action {
                 $response->picturePath = $db->getProfilePicture($response->userID);
                 TokenManagement::generateToken($response->userID);
                 break;
-            case "invalid":
+            case "error":
                 $response->auth = 'false';
-                $response->error = 'invalid';
-                break;
-            case "noSuchUser":
-                $response->auth = 'false';
-                $response->error = 'noSuchUser';
+                $response->error = 'alreadyExists';
                 break;
         }
         return $response;
     }
 
-    public static function needsToken(): bool {
+    static function needsToken(): bool
+    {
         return false;
     }
 }

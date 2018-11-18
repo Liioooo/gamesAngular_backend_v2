@@ -1,7 +1,6 @@
 <?php
 
 namespace app;
-
 use PDO;
 use PDOException;
 
@@ -28,7 +27,7 @@ class DatabaseConnection {
             $stmt->execute();
             return "success";
         } catch(PDOException $e) {
-            return $e->getCode();
+            return 'error';
         }
     }
     
@@ -199,7 +198,7 @@ class DatabaseConnection {
             $stmt = $this->conn->prepare("SELECT highscores.score as 'score', users.username FROM highscores inner join users on highscores.pk_fk_userID = users.pk_userID WHERE highscores.pk_gameID = :gameID ORDER BY `score` DESC");
             $stmt->bindParam(":gameID", $gameID);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_CLASS, 'UserScore');
+            return $stmt->fetchAll(PDO::FETCH_CLASS, 'app\database_helper_classes\UserScore');
         } catch(PDOException $e) {
             return null;
         }
@@ -209,7 +208,7 @@ class DatabaseConnection {
             $stmt = $this->conn->prepare("select score, case pk_gameID WHEN 3 THEN '4 Gewinnt' WHEN 1 THEN 'Flappy Bird' WHEN 0 THEN 'FallingBlocks' END as 'gameName' from highscores inner join users on highscores.pk_fk_userID = users.pk_userID WHERE username = :username");
             $stmt->bindParam(":username", $username);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_CLASS, 'GameScore');
+            return $stmt->fetchAll(PDO::FETCH_CLASS, 'app\database_helper_classes\GameScore');
         } catch(PDOException $e) {
             return null;
         }

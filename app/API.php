@@ -1,7 +1,6 @@
 <?php
 
 namespace app;
-
 use ReflectionClass;
 use ReflectionException;
 use stdClass;
@@ -38,8 +37,8 @@ class API {
         try {
             $class = new ReflectionClass('app\api_actions\\' . ucfirst($action));
             if($class->getMethod('needsToken')->invoke(null)) {
-                if(TokenManagement::verifyToken($this) != null) {
-                    $this->returnResult($class->getMethod('doAction')->invoke(null, $params, $this));
+                if(($userID = TokenManagement::verifyToken($this)) != null) {
+                    $this->returnResult($class->getMethod('doAction')->invoke(null, $params, $userID));
                 }
             } else {
                 $this->returnResult($class->getMethod('doAction')->invoke(null, $params, $this));
