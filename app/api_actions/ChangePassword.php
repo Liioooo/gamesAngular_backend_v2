@@ -18,7 +18,6 @@ class ChangePassword extends Action {
         $db = new DatabaseConnection();
 
         if($db->updatePassword($userID, $params->newPassword, $params->oldPassword) == 'success') {
-            $response->username = $params->newUsername;
             $response->error = '';
         } else {
             $response->error = 'invalid';

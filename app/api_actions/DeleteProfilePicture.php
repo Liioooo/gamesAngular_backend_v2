@@ -12,7 +12,7 @@ class DeleteProfilePicture extends Action {
 
         $oldPicture = $db->getProfilePicture($userID);
         if($oldPicture != '/profilePictures/default-profile-img.svg') {
-            unlink('..' . $oldPicture); //TODO: correct relative Path
+            unlink('..' . $oldPicture);
             $db->updateProfilePicture($userID, '/profilePictures/default-profile-img.svg');
         }
         $response->picturePath = "/profilePictures/default-profile-img.svg";

@@ -13,7 +13,7 @@ class DeleteUserAccount extends Action {
         if($db->checkCredentials($params->username, $params->password)) {
             $oldPicture = $db->getProfilePicture($userID);
             if($oldPicture != '/profilePictures/default-profile-img.svg') {
-                unlink('..' . $oldPicture); //TODO: correct relative Path
+                unlink('..' . $oldPicture);
             }
             $db->deleteUser($userID);
             unset($_COOKIE['jwt-token']);
