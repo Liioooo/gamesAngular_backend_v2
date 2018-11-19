@@ -92,7 +92,7 @@ class DatabaseConnection {
             $stmt->execute();
             return "success";
         } catch(PDOException $e) {
-            return $e->getCode();
+            return 'error';
         }
     }
     

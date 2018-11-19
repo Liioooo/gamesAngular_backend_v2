@@ -6,7 +6,7 @@ use stdClass;
 
 class IsUserAvailable extends Action {
 
-    static function doAction($params, $userID = null): object {
+    static function doAction($params, $userID = null): stdClass {
         $response = new stdClass();
         $db = new DatabaseConnection();
 

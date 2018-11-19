@@ -5,7 +5,7 @@ use stdClass;
 
 class Logout extends Action {
 
-    static function doAction($params, $userID = null): object {
+    static function doAction($params, $userID = null): stdClass {
         $response = new stdClass();
 
         unset($_COOKIE['jwt-token']);

@@ -4,11 +4,9 @@ namespace app\api_actions;
 use stdClass;
 use app\DatabaseConnection;
 
-
 class DeleteProfilePicture extends Action {
 
-    static function doAction($params, $userID = null): object
-    {
+    static function doAction($params, $userID = null): stdClass {
         $response = new stdClass();
         $db = new DatabaseConnection();
 

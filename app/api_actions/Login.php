@@ -7,7 +7,7 @@ use app\DatabaseConnection;
 
 class Login extends Action {
 
-    public static function doAction($params, $userID = null): object {
+    public static function doAction($params, $userID = null): stdClass {
         $response = new stdClass();
         $db = new DatabaseConnection();
 
