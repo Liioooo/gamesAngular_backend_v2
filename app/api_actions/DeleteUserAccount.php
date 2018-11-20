@@ -10,7 +10,9 @@ class DeleteUserAccount extends Action {
         $response = new stdClass();
         $db = new DatabaseConnection();
 
-        if($db->checkCredentials($params->username, $params->password)) {
+        $username = $db->getUsernameByID($userID);
+
+        if($db->checkCredentials($username, $params->password) == 'success') {
             $oldPicture = $db->getProfilePicture($userID);
             if($oldPicture != '/profilePictures/default-profile-img.svg') {
                 unlink('..' . $oldPicture);

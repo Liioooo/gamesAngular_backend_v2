@@ -13,12 +13,12 @@ class Register extends Action {
 
         switch ($db->createUser($params->username, $params->password)) {
             case "success":
-                $response->userID = $db->getIDbyUsername($params->username);
+                $userID = $db->getIDbyUsername($params->username);
                 $response->username = $params->username;
                 $response->auth = 'true';
                 $response->error = '';
-                $response->picturePath = $db->getProfilePicture($response->userID);
-                TokenManagement::generateToken($response->userID);
+                $response->picturePath = $db->getProfilePicture($userID);
+                TokenManagement::generateToken($userID);
                 break;
             case "error":
                 $response->auth = 'false';

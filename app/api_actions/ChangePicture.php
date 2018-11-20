@@ -17,7 +17,7 @@ class ChangePicture extends Action {
         } else {
             $oldPicture = $db->getProfilePicture($userID);
             if($oldPicture != '/profilePictures/default-profile-img.svg' && $oldPicture != $newPicture) {
-                unlink('..' . $oldPicture); //TODO: relative Path
+                unlink('..' . $oldPicture);
             }
             $db->updateProfilePicture($userID, $newPicture);
             $response->error = '';
@@ -37,7 +37,7 @@ class ChangePicture extends Action {
         if(!($extension == 'jpeg' || $extension == 'png' || $extension == 'gif')) {
             return 'error';
         }
-        $ifp = fopen( '../profilePictures/' . $output_file . '.' . $extension, 'wb' ); //TODO: relative Path
+        $ifp = fopen( '../profilePictures/' . $output_file . '.' . $extension, 'wb' );
         $data = explode( ',', $base64_string );
         fwrite( $ifp, base64_decode( $data[ 1 ] ) );
         fclose( $ifp );
