@@ -6,7 +6,7 @@ use Exception;
 
 class TokenManagement {
     static function generateToken($userID) {
-        $expireTime = time() + (60 * 60);
+        $expireTime = time() + (6);
         $keyPayload = [
             'iss' => 'lio-games.ddns.net',
             'iat' => time(),
