@@ -6,7 +6,7 @@ use Exception;
 
 class TokenManagement {
     static function generateToken($userID) {
-        $expireTime = time() + (60 * 60);
+        $expireTime = time() + (6);
         $keyPayload = [
             'iss' => 'lio-games.ddns.net',
             'iat' => time(),
@@ -19,6 +19,9 @@ class TokenManagement {
 
     static function verifyToken(API $api): string {
         try {
+            if(!isset($_COOKIE['jwt-token'])) {
+                throw new Exception();
+            }
             $payload = JWT::decode($_COOKIE['jwt-token'], Constants::SECRET_KEY, ['HS256']);
             return $payload->userID;
         } catch (Exception $e) {
