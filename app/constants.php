@@ -12,5 +12,5 @@ class Constants {
 
     public const SUCCESS_RESPONSE            = 200;
 
-    public const SECRET_KEY                  = 'test123';
+    public const SECRET_KEY                  = '02KC78jz52sqNGE474PcULo6YEOL8aejTqqcbX6M8W9d2xL7FAZ6S1ZG1RC98Uyp';
 }
